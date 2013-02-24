@@ -11,21 +11,27 @@ public class Percolation {
 	
 	public final int GRID_BORDER_LENGTH;
 	
-	public Percolation(int len) {
+	/**
+	 * Creates n-by-n grid, with all sites blocked. 
+	 */
+	public Percolation(int n) {
 		// length of the union find data structure
 		// top and bottom sites are included
-		int siteCount = len * len + 2;  
+		int siteCount = n * n + 2;  
 		
 		GRID_VIRTUAL_TOP_SITE = siteCount - 1;
 		GRID_VIRTUAL_BOTTOM_SITE = siteCount - 2; 		
-		GRID_BORDER_LENGTH = len;
+		GRID_BORDER_LENGTH = n;
 		wuf = new WeightedQuickUnionUF(siteCount);
 		
-		states = new boolean[len*len];
-		for (int i = 0; i < len*len; i++) 
+		states = new boolean[n*n];
+		for (int i = 0; i < n*n; i++) 
 			states[i] = false;
 	}
 	
+	/**
+	 * Opens site if it is not already
+	 */
 	public void open(int row, int col) {		
 		verify(row, col);		
 		if (isOpen(row, col)) return;
@@ -53,22 +59,31 @@ public class Percolation {
 			wuf.union(currentLocation, GRID_VIRTUAL_BOTTOM_SITE);		
 	}
 	
+	/**
+	 * Checks whether grid percolates
+	 */
 	public boolean percolates() {
 		return wuf.connected(GRID_VIRTUAL_TOP_SITE, GRID_VIRTUAL_BOTTOM_SITE);
 	}
 	
+	/**
+	 * Checks whether site is open
+	 */
 	public boolean isOpen(int row, int col) {
 		return states[locate(row, col)];
 	}
 	
+	/**
+	 * Checks whether site is full
+	 */
 	public boolean isFull(int row, int col) {
 		int loc = locate(row, col);
 		return isOpen(row, col) && wuf.connected(loc, GRID_VIRTUAL_TOP_SITE);
 	}
 	
 	/**
-	 * Checks bounds of a given site, throws exception if given row and column
-	 * are outside the bounds of grid.
+	 * Checks bounds of a given site, throws exception if 
+	 * given row and column are outside the bounds of grid.
 	 */
 	private void verify(int row, int col) {
 		if (row < 0 || row > GRID_BORDER_LENGTH)
@@ -79,7 +94,7 @@ public class Percolation {
 	}
 
 	/**
-	 * Retrieves the position of a given site.	
+	 * Retrieves the id array position of a given site.	
 	 */
 	private int locate(int row, int col) {
 		return (row - 1) * GRID_BORDER_LENGTH + (col - 1);
