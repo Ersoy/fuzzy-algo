@@ -14,16 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>libs/algs4.jar</name>
-			<type>1</type>
-			<location>C:/algs4/algs4.jar</location>
-		</link>
-		<link>
-			<name>libs/stdlib.jar</name>
-			<type>1</type>
-			<location>C:/algs4/stdlib.jar</location>
-		</link>
-	</linkedResources>
 </projectDescription>

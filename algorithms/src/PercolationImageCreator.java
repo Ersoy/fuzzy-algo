@@ -11,14 +11,14 @@ public class PercolationImageCreator {
 	private final BufferedImage image;
 	private final Graphics graph;
 	
-	private final int siteSize = 15;
-	private final int size;
+	private final int SITE_SIZE = 15;
+	private final int GRID_SIZE;
 	
 	public PercolationImageCreator(Percolation per) {
 		this.per = per;
-		size = per.length * siteSize;
+		GRID_SIZE = per.GRID_BORDER_LENGTH * SITE_SIZE;
 		
-		image = new BufferedImage(size, size, BufferedImage.TYPE_INT_RGB);
+		image = new BufferedImage(GRID_SIZE, GRID_SIZE, BufferedImage.TYPE_INT_RGB);
 		graph = image.createGraphics();				
 		clean();
 	}
@@ -28,35 +28,35 @@ public class PercolationImageCreator {
 		try {
 			draw();
 			ImageIO.write(image, "png", file);
-		} catch (IOException e) {			// 
+		} catch (IOException e) { 
 			e.printStackTrace();
 		}
 	}
 	
 	private void draw() {
-		for (int i = 1; i <= per.length; i++)
-			for (int j = 1; j <= per.length; j++)
+		for (int i = 1; i <= per.GRID_BORDER_LENGTH; i++)
+			for (int j = 1; j <= per.GRID_BORDER_LENGTH; j++)
 				drawSite(i, j);
 	}
 	
-	private void drawSite(int row, int col) {	
-		Point locate = new Point((col-1) * siteSize, (row-1) * siteSize); 
-		if (per.isFull(row, col)) {
-			graph.setColor(Color.magenta);		
-			graph.fillRect(locate.x, locate.y, siteSize, siteSize);
-			graph.setColor(Color.black);
-			graph.drawRect(locate.x, locate.y, siteSize, siteSize);
-		} else if (per.isOpen(row, col)) {
-			graph.setColor(Color.white);
-			graph.fillRect(locate.x, locate.y, siteSize, siteSize);
-			graph.setColor(Color.black);			
-			graph.drawRect(locate.x, locate.y, siteSize, siteSize);
+	private void drawSite(int row, int col) {
+		if (per.isOpen(row, col)) {
+			Color color = per.isFull(row, col) ? Color.magenta : Color.white;
+			drawSite(row, col, color);
 		}
+	}
+	
+	private void drawSite(int row, int col, Color color) {
+		Point locate = new Point((col-1) * SITE_SIZE, (row-1) * SITE_SIZE);
+		graph.setColor(color);		
+		graph.fillRect(locate.x, locate.y, SITE_SIZE, SITE_SIZE);
+		graph.setColor(Color.black);
+		graph.drawRect(locate.x, locate.y, SITE_SIZE, SITE_SIZE);
 	}
 	
 	private void clean() {
 		graph.setColor(Color.black);
-		graph.fillRect(0, 0, size, size);
+		graph.fillRect(0, 0, GRID_SIZE, GRID_SIZE);
 	}
 	
 	public static void main(String[] args) {
