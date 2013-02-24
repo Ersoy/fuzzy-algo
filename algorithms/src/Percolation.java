@@ -4,7 +4,7 @@
  * Last updated: 2/24/2013
  *-----------------------------------------------------------------*/
 
-public class Percolation {
+public class Percolation {	
 	private final WeightedQuickUnionUF wuf;
 	private final int GRID_VIRTUAL_TOP_SITE, GRID_VIRTUAL_BOTTOM_SITE;
 	private final boolean[] states;
