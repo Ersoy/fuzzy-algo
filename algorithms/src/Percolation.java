@@ -1,5 +1,5 @@
 
-public class Percolation {
+public class Percolation {	
 	private final WeightedQuickUnionUF wuf;
 	private final int top, bottom, seq;
 	private final boolean[] states;

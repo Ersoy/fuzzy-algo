@@ -1,7 +1,7 @@
 import java.util.Random;
 
 public class UsePercolation {
-
+	
 	public static void main(String[] args) {
 		int len = 20, i = 0;
 		Random rand = new Random(System.currentTimeMillis());
@@ -16,8 +16,7 @@ public class UsePercolation {
 				StdOut.println();
 			}
 		}
-		
+
 		per.draw();
 	}
-	
 }

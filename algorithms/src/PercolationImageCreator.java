@@ -6,7 +6,7 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
-public class PercolationImageCreator {
+public class PercolationImageCreator {	
 	private final Percolation per;
 	private final BufferedImage image;
 	private final Graphics graph;
