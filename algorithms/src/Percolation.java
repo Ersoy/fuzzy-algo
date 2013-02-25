@@ -16,7 +16,7 @@ public class Percolation {
 	 */
 	public Percolation(int n) {
 		// length of the union find data structure
-		// top and bottom sites are included
+		// top and bottom sites included
 		int siteCount = n * n + 2;  
 		
 		GRID_VIRTUAL_TOP_SITE = siteCount - 1;
