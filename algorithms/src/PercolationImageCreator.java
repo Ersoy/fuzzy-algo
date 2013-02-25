@@ -41,7 +41,7 @@ public class PercolationImageCreator {
 	
 	private void drawSite(int row, int col) {
 		if (per.isOpen(row, col)) {
-			Color color = per.isFull(row, col) ? Color.magenta : Color.white;
+			Color color = per.isFull(row, col) ? new Color(0x5B97D4) : Color.white;
 			drawSite(row, col, color);
 		}
 	}

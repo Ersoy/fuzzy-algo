@@ -15,7 +15,7 @@ public class Percolation {
 	 * Creates n-by-n grid, with all sites blocked. 
 	 */
 	public Percolation(int n) {
-		// length of the union find data structure
+		// length of the id array
 		// top and bottom sites included
 		int siteCount = n * n + 2;  
 		
@@ -69,7 +69,7 @@ public class Percolation {
 	/**
 	 * Checks whether site is open
 	 */
-	public boolean isOpen(int row, int col) {
+	public boolean isOpen(int row, int col) {		
 		return states[locate(row, col)];
 	}
 	
@@ -98,39 +98,5 @@ public class Percolation {
 	 */
 	private int locate(int row, int col) {
 		return (row - 1) * GRID_BORDER_LENGTH + (col - 1);
-	}
-	
-	/**
-	 * Displays current state of the percolation grid by
-	 * drawing each site with a specific character 
-	 * (e.g. open +, close -, full *). 	
-	 */
-	public void draw() {
-		for (int i = 1; i <= GRID_BORDER_LENGTH; i++) {
-			for (int j = 1; j <= GRID_BORDER_LENGTH; j++) {				
-				StdOut.printf("%2s", isFull(i, j) ? "*" : isOpen(i, j) ? "+" : "-");
-			}
-			StdOut.println();
-		}
-	}
-	
-	public static void main(String[] args) {
-		Percolation per = new Percolation(6);
-		per.open(1, 2);
-		per.open(2, 2);
-		per.open(3, 2);
-		per.open(4, 2);
-		per.open(5, 2);
-		per.open(6, 3);
-		per.open(2, 5);
-		per.open(2, 6);
-		per.open(3, 6);
-		per.open(3, 3);
-		per.open(2, 6);
-		per.open(5, 1);
-		per.open(6, 1);
-		per.draw();
-		
-		StdOut.printf("Percolates %s\n", per.percolates());
 	}
 }
