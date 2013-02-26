@@ -60,7 +60,7 @@ public class PercolationImageCreator {
 	}
 	
 	public static void main(String[] args) {
-		int len = 15;
+		int len = 25;
 		Random rand = new Random(System.currentTimeMillis());
 		Percolation per = new Percolation(len);
 		PercolationImageCreator creator = new PercolationImageCreator(per);

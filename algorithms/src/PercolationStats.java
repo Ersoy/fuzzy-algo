@@ -1,3 +1,8 @@
+/*-----------------------------------------------------------------
+ * Author:       Ersoy Hasanoglu
+ * Written:      2/18/2013
+ * Last updated: 2/24/2013
+ *-----------------------------------------------------------------*/
 
 public class PercolationStats {
 	private final int N, T;
@@ -6,10 +11,9 @@ public class PercolationStats {
 	public PercolationStats(int n, int t) {
 		if (n <= 0 || t <= 0)
 			throw new IllegalArgumentException();
-		
 		N = n; T = t;
 		
-		Examplify ex = new Examplify();		
+        Examplify ex = new Examplify();        
 		trasholds = ex.getTrasholds();
 	}
 
@@ -20,32 +24,32 @@ public class PercolationStats {
 		}
 		return total / T;
 	}
-	
+
 	public double stddev() {
 		double count = 0;
 		for (int i = 0; i < T; i++)
 			count += Math.pow(trasholds[i] - mean(), 2);
 		return Math.sqrt(count / (T - 1));
 	}
-	
+
 	public double confidenceLo() {		
 		return mean() - 1.96 * stddev() / Math.sqrt(T);
 	}
-	
+
 	public double confidenceHi() {
 		return mean() + 1.96 * stddev() / Math.sqrt(T);
 	}
-	
+
 	class Examplify {
 		private double[] trasholds;		
-		
+
 		public Examplify() {
 			StdRandom.setSeed(System.currentTimeMillis());
 			trasholds = new double[T];
 			for (int i = 0; i < T; i++) 
 				trasholds[i] = trashold();
 		}
-		
+
 		public double[] getTrasholds() {
 			return trasholds;
 		}
@@ -64,7 +68,7 @@ public class PercolationStats {
 			return count / (N * N);
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		int n = StdIn.readInt();
 		int t = StdIn.readInt();
